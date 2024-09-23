@@ -7,15 +7,21 @@ public class Program
     
     public static void Main(string[] args)
     {
-        // Multi-threading
-
-        List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
-
-        foreach (int number in numbers)
+        try
         {
-            int localNumber = number; // Capture the current number for the thread
-            Thread thread = new Thread(() => numberProcessor.ProcessNumber(localNumber));
-            thread.Start();
+            // Multi-threading
+
+            List<int> numbers = new List<int> { 1, 2, 3, 4, 5 };
+
+            foreach (int number in numbers)
+            {
+                Thread thread = new Thread(() => numberProcessor.ProcessNumber(number));
+                thread.Start();
+            }
+        }
+        catch (Exception ex) 
+        { 
+            Console.WriteLine($"Error: ${ex.Message}");
         }
     }
 }
